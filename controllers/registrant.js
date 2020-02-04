@@ -2,17 +2,18 @@ const express = require('express')
 const service = require('../services/registrant')
 const response = require('../helpers/response')
 const mailer = require('../helpers/mailer')
+const auth = require('./middleware/auth')
 
 const router = express.Router()
 
 // Get All Registrant
-router.get('/', async (req, res) => {
+router.get('/', auth.verify, async (req, res) => {
     const result = await service.getAll()
     return await response(res, true, 'success get All registrant', result, 200)
 })
 
 // Get One Registrant by ID
-router.get('/:id', async (req, res) => {
+router.get('/:id', auth.verify, async (req, res) => {
     const result = await service.getOne({ id: req.params.id })
     return await response(res, true, 'success get one registrant', result, 200)
 })
