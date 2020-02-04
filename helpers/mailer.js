@@ -22,12 +22,21 @@ const sender = async () => {
     // console.log("Message sent: %s", info.messageId);
     const email = new Email({
         message: {
-          from: 'ahmadhaqqi690@gmail.com'
+          from: 'ahmadhaqqi690@gmail.com',
+	  subject: 'Pendaftaran'
         },
         // uncomment below to send emails in development/test env:
-        // send: true
-        transport: transporter
-    });
+        send: true,
+        transport: {
+        	host: "smtp.gmail.com",
+        	port: 587,
+        	secure: false, // true for 465, false for other ports
+        	auth: {
+            		user: process.env.MAIL_USER, // generated ethereal user
+            		pass: process.env.MAIL_PASS // generated ethereal password
+        	}
+    	}
+    })
 
     email
     .send({
