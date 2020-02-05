@@ -17,11 +17,12 @@ const create = async (data) => {
 }
 
 const getOne = async (where) => {
+    console.log(where)
     const result = await Registrant.findOne({
         where: where
     })
     if(!result) {
-        throw Error('Failed to get Registrant')
+        throw Error('Failed to get Registrant, '+result)
     }
     return result
 }
