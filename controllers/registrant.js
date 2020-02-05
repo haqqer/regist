@@ -3,6 +3,7 @@ const service = require('../services/registrant')
 const response = require('../helpers/response')
 const mailer = require('../helpers/mailer')
 const auth = require('../middleware/auth')
+const { QRCode } = require('qrcode')
 
 const router = express.Router()
 
@@ -22,9 +23,11 @@ router.get('/:id', auth.verify, async (req, res) => {
 router.post('/', async (req, res) => {
     req.body.status = 0
     const result = await service.create(req.body)
+    const qrcodeImage = QRCode.toDataURL(req.body.email)
     const sendEmail = await mailer('ahmadhaqqi690@gmail.com', req.body.email, 'Pendaftaran', {
         name: req.body.name,
-        email: req.body.email
+        email: req.body.email,
+        qrcode: qrcodeImage
     })
     return await response(res, true, 'success create registrant', result, 201)
 })

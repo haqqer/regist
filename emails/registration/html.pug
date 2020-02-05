@@ -1,7 +1,4 @@
 p Selamat #{name},
 p Kamu terdaftar sebagai peserta Event FEB.
-#qrcode
-script(src='http://bemfeb.chickenkiller.com/js/jquery.min.js')
-script(src='http://bemfeb.chickenkiller.com/js/qrcode.min.js')
-script(type='text/javascript').
-  new QRCode(document.getElementById("qrcode"), "#{email}");
+br
+img(src="#{image}")
