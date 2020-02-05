@@ -23,8 +23,8 @@ router.get('/:id', auth.verify, async (req, res) => {
 router.post('/', async (req, res) => {
     req.body.status = 0
     const result = await service.create(req.body)
-    const qrcodeImage = await qrcode.toDataURL(req.body.email)
-    const sendEmail = await mailer('ahmadhaqqi690@gmail.com', req.body.email, 'Pendaftaran', {
+    const qrcodeImage = await qrcode.toDataURL(req.body.email, { width: 300 })
+    const sendEmail = await mailer('ahmadhaqqi690@gmail.com', req.body.email, 'Pendaftaran Event', {
         name: req.body.name,
         email: req.body.email,
         qrcode: qrcodeImage
