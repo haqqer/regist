@@ -2,7 +2,7 @@ const express = require('express')
 const service = require('../services/registrant')
 const response = require('../helpers/response')
 const mailer = require('../helpers/mailer')
-const auth = require('./middleware/auth')
+const auth = require('../middleware/auth')
 
 const router = express.Router()
 

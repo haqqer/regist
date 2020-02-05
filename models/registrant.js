@@ -4,6 +4,9 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     nim: DataTypes.STRING,
     email: DataTypes.STRING,
+    phone: DataTypes.STRING,
+    institute: DataTypes.STRING,
+    socmed: DataTypes.STRING,
     status: DataTypes.INTEGER
   }, {});
   Registrant.associate = function(models) {

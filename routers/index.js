@@ -4,6 +4,9 @@ const router = express.Router()
 const auth = require('../middleware/auth')
 const registrant = require('../controllers/registrant')
 
+router.get('/', (req, res) => {
+    res.json({ status: 'ok' })
+})
 router.use('/registrant', registrant)
 
 module.exports = router
