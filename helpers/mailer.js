@@ -5,7 +5,11 @@ const sender = async (from, to, subject, data) => {
     const email = new Email({
         message: {
           from: from,
-	        subject: subject
+          subject: subject,
+          attachments: [{
+            filename: `${data.name}.jpg`,
+            content: new Buffer(data.qrcode, 'base64')
+          }]
         },
         // uncomment below to send emails in development/test env:
         send: true,
