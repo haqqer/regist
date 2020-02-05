@@ -7,8 +7,8 @@ const sender = async (from, to, subject, data) => {
           from: from,
           subject: subject,
           attachments: [{
-            filename: `${data.name}.jpg`,
-            content: new Buffer(data.qrcode, 'base64')
+            filename: `${data.name}.png`,
+            content: new Buffer(data.qrcode.split("base64,")[1], 'base64')
           }]
         },
         // uncomment below to send emails in development/test env:
