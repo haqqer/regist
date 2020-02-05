@@ -7,6 +7,7 @@ const { router } = require('./middleware/auth')
 const routes = require('./routers')
 
 app.use(logger('dev'))
+app.set('view engine', 'pug')
 app.use(express.static('public'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
