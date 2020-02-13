@@ -21,11 +21,12 @@ router.get('/', auth.verify, async (req, res) => {
 })
 
 // Get One Registrant by ID
-router.get('/:id', auth.verify, async (req, res) => {
+router.get('/:regisId', auth.verify, async (req, res) => {
     try {
-        const result = await service.getOne({ id: req.params.id })
+        const result = await service.getOne({ regisId: req.params.regisId })
         return await response(res, true, 'success get one registrant', result, 200)
     } catch (error) {
+        console.log(error)
         return await response(res, false, 'Error', error, 500)
     }
 })
@@ -34,8 +35,9 @@ router.get('/:id', auth.verify, async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         req.body.status = 0
+        req.body.regisId = 'feb-'+new Date().getMilliseconds()
         const result = await service.create(req.body)
-        const qrcodeImage = await qrcode.toDataURL(req.body.email, { width: 300 })
+        const qrcodeImage = await qrcode.toDataURL(req.body.regisId, { width: 300 })
         const sendEmail = await mailer('ahmadhaqqi690@gmail.com', req.body.email, 'Pendaftaran Event', {
             name: req.body.name,
             email: req.body.email,
