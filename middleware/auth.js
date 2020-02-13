@@ -27,6 +27,21 @@ router.post('/login',  async (req, res) => {
     return await response(res, true, 'login success', { token: token, user: user }, 200)
 })
 
+router.get('/me', async (req, res) => {
+    try {
+        if(!req.headers.authorization) {
+            return await response(res, false, 'token not existed', {}, 401)
+        }
+        const token = req.headers.authorization.split(' ')[1]
+        const decoded = jwt.decode(token)
+        if(!decoded) {
+            return await response(res, false, 'token unrecognized', {}, 400)
+        }
+        return await response(res, true, '', { decoded: decoded }, 200)
+    } catch (error) {
+        return await response(res, false, 'Error', error, 500)
+    }
+})
 const verify = async (req, res, next) => {
     try {
         if(!req.headers.authorization) {
