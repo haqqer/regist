@@ -9,7 +9,11 @@ module.exports = (sequelize, DataTypes) => {
     institute: DataTypes.STRING,
     socmed: DataTypes.STRING,
     status: DataTypes.INTEGER
-  }, {});
+  }, {
+    sequelize,
+    paranoid: true,
+    deletedAt: 'destroyTime'
+  });
   Registrant.associate = function(models) {
     // associations can be defined here
   };
