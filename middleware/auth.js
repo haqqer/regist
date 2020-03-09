@@ -57,7 +57,4 @@ const verify = async (req, res, next) => {
         return await response(res, false, 'Error', error, 500)
     }
 }
-module.exports = { 
-    router,
-    verify
-}
+module.exports = router

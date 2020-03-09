@@ -2,13 +2,13 @@ const express = require('express')
 const service = require('../services/registrant')
 const response = require('../helpers/response')
 const mailer = require('../helpers/mailer')
-const auth = require('../middleware/auth')
+const verify = require('../middleware/verify')
 const qrcode = require('qrcode')
 
 const router = express.Router()
 
 // Get All Registrant
-router.get('/', auth.verify, async (req, res) => {
+router.get('/', verify, async (req, res) => {
     try {
         const result = await service.getAll()
         if(result.length < 1) {
@@ -21,7 +21,7 @@ router.get('/', auth.verify, async (req, res) => {
 })
 
 // Get One Registrant by ID
-router.get('/:regisId', auth.verify, async (req, res) => {
+router.get('/:regisId', verify, async (req, res) => {
     try {
         const result = await service.getOne({ regisId: req.params.regisId })
         return await response(res, true, 'success get one registrant', result, 200)
