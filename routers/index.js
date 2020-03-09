@@ -7,6 +7,8 @@ const registrant = require('../controllers/registrant')
 router.get('/', (req, res) => {
     res.json({ status: 'ok' })
 })
+
+router.use('/auth', auth)
 router.use('/registrant', registrant)
 
 module.exports = router
